@@ -29,6 +29,7 @@
     "dompurify": "^2.0.10",
     "react-native-get-random-values": "^1.4.0",
     "react-native-uuid": "^1.4.9",
+    "react-native-device-info": "^5.5.4",
     "sdp-transform": "^2.3.0",
     "webrtc-adapter": "^6.4.8",
     "websocket": "^1.0.28"

@@ -26,13 +26,13 @@
     "blueimp-md5": "^2.13.0",
     "bowser": "^2.7.0",
     "debug": "^4.1.1",
-    "dompurify": "^2.0.10",
+    "react-native-device-info": "^5.5.4",
     "react-native-get-random-values": "^1.4.0",
     "react-native-uuid": "^1.4.9",
-    "react-native-device-info": "^5.5.4",
     "sdp-transform": "^2.3.0",
     "webrtc-adapter": "^6.4.8",
-    "websocket": "^1.0.28"
+    "websocket": "^1.0.28",
+    "xss": "^1.0.8"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

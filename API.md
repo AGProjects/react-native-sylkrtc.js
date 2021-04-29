@@ -200,19 +200,20 @@ which SylkServer will inject with the other parameters as parameters into to con
 The parameter `silent` must be a boolean and all other parameters should be strings.
 
 
-#### Account.sendMessage(uri, message, contentType) *WIP*
+#### Account.sendMessage(uri, message, options. contentType) *WIP*
 
 Send a (SIP) message to uri. The message will be send with IMDN enabled. `message` should contain a string, `type` should contain the message content type like
-'text/plain', 'text/html', 'image/png'. The function returns an instance of `Message`.
+'text/plain', 'text/html', 'image/png'. The function returns an instance of `Message`. `Options` can contain an `id`.
 
 
-#### Account.sendDispositionNotification(uri, id, timestamp, state) *WIP*
+#### Account.sendDispositionNotification(uri, id, timestamp, state, callback) *WIP*
 
 Send a disposition notification to uri. `id` should contain the original
 message id, `timestamp` should contain the original timestamp, `state` should
 contain the IMDN state you want to send. `delivered` will be sent automatically if
 the received messages requested `positive-delivery` disposition.
 
+An optional callback can be given, which will be called with an error if there was one.
 
 ### Call
 

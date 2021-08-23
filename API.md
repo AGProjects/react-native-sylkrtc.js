@@ -206,7 +206,7 @@ Send a (SIP) message to uri. The message will be send with IMDN enabled. `messag
 'text/plain', 'text/html', 'image/png'. The function returns an instance of `Message`. `Options` can contain an `id`.
 
 
-#### Account.sendDispositionNotification(uri, id, timestamp, state, callback) *WIP*
+#### Account.sendDispositionNotification(uri, id, timestamp, state, cb=null) *WIP*
 
 Send a disposition notification to uri. `id` should contain the original
 message id, `timestamp` should contain the original timestamp, `state` should
@@ -688,3 +688,7 @@ Getter property for the type of the message, it can be `normal` or `status`.
 
 Getter property for the state of the message. It can be `received`, `pending`, `delivered`, `failed`, `accepted`, `displayed`.
 
+
+#### Message.dispostionState
+
+Getter property for the dispositon state of the message. It can be `delivered`, `displayed`.

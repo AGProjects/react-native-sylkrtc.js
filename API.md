@@ -228,6 +228,7 @@ The parameter `silent` must be a boolean and all other parameters should be stri
 
 Send a message to (SIP) uri. The message will be send with IMDN enabled. `message` should contain a string, `type` should contain the message content type like
 'text/plain', 'text/html', 'image/png'. The function returns an instance of `Message`. `Options` can contain an `id`.
+and can contain a timestamp key with a Date Object.
 
 The callback will return with an optional error if the message was sent.
 

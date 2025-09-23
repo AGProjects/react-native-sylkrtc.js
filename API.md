@@ -431,6 +431,10 @@ Getter property which returns an object with the directions of the remote stream
 Getter property which returns the custom headers array associated with this call. This will contain the matched headers
 from the incomingHeaderPrefixes, or the headers set on outgoing calls.
 
+#### Call.statistics
+
+Getter property which returns a `statistics` object for the call.
+
 
 ### Conference
 
@@ -604,6 +608,11 @@ Getter property which returns if audio relaying/offer is supported by the server
 #### Conference.supportsVideo
 
 Getter property which returns if video relaying/offer is supported by the server.
+
+
+#### Conference.statistics
+
+Getter property which returns a `statistics` object for the conference.
 
 
 ### Participant
@@ -786,3 +795,32 @@ Getter property for the state of the message. It can be `received`, `pending`, `
 #### Message.dispositionState
 
 Getter property for the disposition state of the message. It can be `delivered`, `displayed`.
+
+
+### Statistics
+
+Object used to gather statistics.
+
+Events emitted:
+* **stats**: emitted when the statistics are gathered for a peerConnection. The argument is a object containing the statistics.
+  Note that in case of a conference this event happens for each peerConnection present. The object contains the following:
+   * **peerId**: the id of the peer connection,
+   * **connectionId**: a connectionId,
+   * **data**: parsed statistics data object:
+
+            audio: {
+                inbound: [],
+                outbound: []
+            },
+            video: {
+                inbound: [],
+                outbound: []
+            },
+            connection: {
+                inbound: [],
+                outbound: []
+            }
+            remote: {
+                inbound: [],
+                outbound: []
+            }

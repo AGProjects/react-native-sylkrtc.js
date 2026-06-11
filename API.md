@@ -19,13 +19,22 @@ Example:
 
     let connection = sylkrtc.createConnection({server: 'wss://1.2.3.4:8088/webrtcgateway/ws'});
 
-If the optional userAgent object is given, it should contain:
-* `name` : string with the name of the application.
-* `version`: version string of the application.
+The optional `userAgent` lets the application fully control how it
+identifies itself to the server. It REPLACES the library default and may
+be given as either:
 
-Example with userAgent:
+* a ready-made string, used verbatim, or
+* an object containing:
+  * `name` : string with the name of the application.
+  * `version`: version string of the application.
 
-    let connection = sylkrtc.createConnection({server: 'wss://1.2.3.4:8088/webrtcgateway/ws', userAgent: {name: 'Some Apllication', version: '0.99.9'}});
+Example with userAgent object:
+
+    let connection = sylkrtc.createConnection({server: 'wss://1.2.3.4:8088/webrtcgateway/ws', userAgent: {name: 'Some Application', version: '0.99.9'}});
+
+Example with userAgent string:
+
+    let connection = sylkrtc.createConnection({server: 'wss://1.2.3.4:8088/webrtcgateway/ws', userAgent: 'Blink Mobile (Some Device on Some OS)'});
 
 
 #### sylkrtc.utils

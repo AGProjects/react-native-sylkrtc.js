@@ -15,6 +15,26 @@ Ports the addressbook API from sylkrtc.js.
   `addressbook-update-failed` server events, emitting `dataLoaded`,
   `dataCacheLoaded`, `dataUpdated`, `dataUpdateFailed` and `dataDeleted`.
 
+Folds in the sylk-mobile field patch (previously
+`react-native-sylkrtc+1.7.0.patch`):
+
+#### Messaging (account, call)
+- Skip the automatic `delivered` IMDN for
+  `application/sylk-message-metadata` messages (location ticks, meeting
+  handshakes, control markers) so transient control traffic doesn't
+  generate per-tick delivery receipts over the wire.
+
+#### Call (call)
+- Stash the raw answer SDP as `Call._answerSdp` before it round-trips
+  through the native peer connection, so consumers can still read the
+  remote's `s=` product token (libwebrtc rewrites the session name to
+  `s=-` on `setRemoteDescription`).
+
+#### Statistics (statistics)
+- In-flight guard on the stats monitoring poller: skip a tick while a
+  previous `getStats()` is still pending (with a stale-timeout escape) to
+  avoid piling up pending native callbacks under load.
+
 ## 1.7.0 - 2026-06-11
 
 Folds in the sylk-mobile field changes: react-native-webrtc M124 support,

@@ -13,6 +13,7 @@ This client library can be used for creating Web applications with the following
 * 1-to-1 messaging
 * Chat in conferences
 * SIP interoperability
+* Addressbook
 
 
 ## Building

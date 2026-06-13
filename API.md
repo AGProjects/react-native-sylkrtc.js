@@ -117,6 +117,10 @@ Close the connection with SylkServer. All accounts will be unbound.
 
 Getter property returning the current connection state.
 
+#### Connection.addressbook
+
+Getter property returning the addressbook.
+
 
 ### Account
 
@@ -235,7 +239,7 @@ Getter property returning the current registration state.
 Getter property returning the value of incomingHeaderPrefixes.
 
 
-#### Account.messages *WIP*
+#### Account.messages
 
 Getter property returning the messages.
 
@@ -247,7 +251,7 @@ which SylkServer will inject with the other parameters as parameters into to con
 The parameter `silent` must be a boolean and all other parameters should be strings.
 
 
-#### Account.sendMessage(uri, message, type, options={}, cb=null) *WIP*
+#### Account.sendMessage(uri, message, type, options={}, cb=null)
 
 Send a message to (SIP) uri. The message will be send with IMDN enabled. `message` should contain a string, `type` should contain the message content type like
 'text/plain', 'text/html', 'image/png'. The function returns an instance of `Message`. `Options` can contain an `id`.
@@ -256,7 +260,7 @@ and can contain a timestamp key with a Date Object.
 The callback will return with an optional error if the message was sent.
 
 
-#### Account.sendDispositionNotification(uri, id, timestamp, state, cb=null) *WIP*
+#### Account.sendDispositionNotification(uri, id, timestamp, state, cb=null)
 
 Send a disposition notification to uri. `id` should contain the original
 message id, `timestamp` should contain the original timestamp, `state` should
@@ -266,7 +270,7 @@ the received messages requested `positive-delivery` disposition.
 An optional callback can be given, which will be called with an error if there was one.
 
 
-#### Account.syncConversations(id=null, options={}, cb=null) *WIP*
+#### Account.syncConversations(id=null, options={}, cb=null)
 
 Send a sync conversations request starting from `id`. The `id` can contain the
 last '`messageId` received. If the `id` argument is omitted and no options are set, **all** stored
@@ -277,18 +281,18 @@ If id is also provided it takes precedence.
 
 The callback will return with an optional error if the message was sent.
 
-#### Account.markConversationRead(uri) *WIP*
+#### Account.markConversationRead(uri)
 
 Sends a markConversationRead request to the server for  `uri`. It will also mark all messages from `uri` in the local account as displayed.
 If you have other devices online, they will get a `readConversation` event.
 
 
-#### Account.removeMessage(message, cb=null) *WIP*
+#### Account.removeMessage(message, cb=null)
 
 Removes a message from the (local) account object and server. If you have other devices online, they will get a `removeMessage` event.
 
 
-#### Account.removeConversation(uri, cb=null) *WIP*
+#### Account.removeConversation(uri, cb=null)
 
 Removes all messages from and to  `uri` from the (local) account object and server. If you have other devices online, they will get a `removeConversation` event.
 
@@ -833,3 +837,187 @@ Events emitted:
                 inbound: [],
                 outbound: []
             }
+
+
+### Addressbook
+
+Object that contains the addressbook from all the accounts. It will be populated if the account registers successfully.
+
+
+Events emitted:
+* **dataLoaded**: emitted when the addressbook data from the server for an account is loaded,
+* **dataCacheLoaded**: emitted when the addressbook cache data from the client is loaded,
+* **dataUpdated**: emitted when the addressbook data is updated on the server,
+* **dataUpdateFailed**: emitted when the addressbook data failed to
+  update on the server. The client should retry the operaton later. Five arguments are provided: `error`,
+  `action`, `type`, `data`, `account`,
+* **dataDeleted**: emitted when addressbook data is deleted on the server.
+
+
+#### Addressbook.contacts
+
+Getter property to get all the contacts.
+
+#### Addressbook.policies
+
+Getter property to get all the policies.
+
+#### Addressbook.groups
+
+Getter property to get all the groups.
+
+#### Addressbook.getContact(contactId)
+
+Get a single contact with `contactId`.
+
+#### Addressbook.addContact(contact)
+
+Add a contact for all accounts on the connection.
+
+#### Addressbook.updateContact(contact)
+
+Update a contact for all accounts on the connection.
+
+#### Addressbook.deleteContact(contactId)
+
+Delete a contact with `contactId` for all accounts on the connection.
+
+#### Addressbook.getPolicy(policyId)
+
+Get a single policy with `policyId` for all accounts on the connection.
+
+#### Addressbook.addPolicy(policy)
+
+Add a policy for all accounts on the connection.
+
+#### Addressbook.updatePolicy(policy)
+
+Update a policy for all accounts on the connection.
+
+#### Addressbook.deletePolicy(policyId)
+
+Delete a policy with `policyId` for all accounts on the connection.
+
+#### Addressbook.getGroup(groupId)
+
+Get a single group with `groupId` for all accounts on the connection.
+
+#### Addressbook.addGroup(group)
+
+Add a group for all accounts on the connection.
+
+#### Addressbook.updateGroup(group)
+
+Update a group for all accounts on the connection.
+
+#### Addressbook.deleteGroup(groupId)
+
+Delete a group with `groupId` for all accounts on the connection.
+
+#### Addressbook.addGroupMember(groupId, contactId)
+
+Add a `contactId` to a `groupId` for all accounts on the connection.
+
+#### Addressbook.deleteGroupMember(groupId, contactId)
+
+Delete a `contactId` from a `groupId` for all accounts on the connection.
+
+#### Addressbook.load(addressbookData)
+
+Load stored data into the addressbook.
+
+#### Datastructures:
+
+##### Contact:
+
+```javascript
+{
+  "id": "string",
+  "name": "string",
+  "uris": [
+    {
+      "id": "string",
+      "uri": "string",
+      "type": "string",
+      "attributes": {},
+      "default": false
+    }
+  ],
+  "dialog": {
+    "policy": "default",
+    "subscribe": false
+  },
+  "presence": {
+    "policy": "default",
+    "subscribe": false
+  },
+  "attributes": {},
+  "default_uri": {
+    "id": "string",
+    "uri": "string",
+    "type": "string",
+    "attributes": {}
+  }
+}
+```
+
+
+##### Policy
+
+
+```javascript
+{
+  "id": "string",
+  "name": "string",
+  "uri": "string",
+  "dialog": {
+    "policy": "default",
+    "subscribe": false
+  },
+  "presence": {
+    "policy": "default",
+    "subscribe": false
+  },
+  "attributes": {}
+}
+```
+
+##### Group
+
+```javascript
+{
+  "id": "string",
+  "name": "string",
+  "attributes": {},
+  "contacts": [
+    {
+      "id": "string",
+      "name": "string",
+      "uris": [
+        {
+          "id": "string",
+          "uri": "string",
+          "type": "string",
+          "attributes": {},
+          "default": false
+        }
+      ],
+      "dialog": {
+        "policy": "default",
+        "subscribe": false
+      },
+      "presence": {
+        "policy": "default",
+        "subscribe": false
+      },
+      "attributes": {},
+      "default_uri": {
+        "id": "string",
+        "uri": "string",
+        "type": "string",
+        "attributes": {}
+      }
+    }
+  ]
+}
+```

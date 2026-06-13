@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.0 - 2026-06-13
+
+Ports the addressbook API from sylkrtc.js.
+
+### Added
+
+#### Addressbook (addressbook, connection, account)
+- New `Addressbook` class managing contacts, policies and groups across all
+  accounts on a connection, exposed via `connection.addressbook`.
+- `Account.addressbookFetched` getter; the addressbook is fetched
+  automatically once an account becomes `registered`.
+- Handles the `addressbook-fetched`, `addressbook-updated` and
+  `addressbook-update-failed` server events, emitting `dataLoaded`,
+  `dataCacheLoaded`, `dataUpdated`, `dataUpdateFailed` and `dataDeleted`.
+
 ## 1.7.0 - 2026-06-11
 
 Folds in the sylk-mobile field changes: react-native-webrtc M124 support,

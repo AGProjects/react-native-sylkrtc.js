@@ -1,9 +1,25 @@
 # Changelog
 
-## 2.0.1 - 2026-06-14
+## 2.0.2 - 2026-06-14
 
-Folds in the sylk-mobile field patch
-(`react-native-sylkrtc+2.0.0.patch`).
+### Fixed
+
+#### Addressbook
+- `Addressbook._populate()` now **replaces** the contact/group/policy caches on
+  a full load instead of merging into them. Previously a contact or group that
+  had been deleted on another device lingered in the cache forever — a re-fetch
+  could never drop it — so deleted groups kept showing.
+- `Addressbook._update()` now **removes** the item from its cache on a `delete`
+  action (it previously only emitted `dataDeleted`, leaving the stale entry in
+  the map until app restart).
+- `Addressbook._updateFailed()` now forwards the server's `retryable` flag on
+  the `dataUpdateFailed` event, so clients can queue transient write failures
+  for retry and drop permanent (4xx) ones.
+
+  (These were previously carried as a `patch-package` patch in the consuming
+  app; folded into the library here.)
+
+## 2.0.1 - 2026-06-14
 
 ### Fixed
 

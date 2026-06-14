@@ -1,6 +1,6 @@
 {
   "name": "react-native-sylkrtc",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "lib/sylkrtc.js",
   "description": "SylkServer WebRTC Gateway client library for react-native",
   "repository": {

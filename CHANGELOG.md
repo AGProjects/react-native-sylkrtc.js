@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.0.1 - 2026-06-14
+
+Folds in the sylk-mobile field patch
+(`react-native-sylkrtc+2.0.0.patch`).
+
+### Fixed
+
+#### DTMF (call)
+- `Call.sendDtmf()` no longer calls the non-existent
+  `RTCPeerConnection.sendDTMF()`, which threw
+  `TypeError: this._pc.sendDTMF is not a function` under react-native-webrtc
+  124 / unified plan and broke outgoing DTMF. Tones are now sent through the
+  audio `RTCRtpSender`'s `dtmf` channel (`RTCDTMFSender.insertDTMF`), with a
+  lazy fallback that resolves `_dtmfSender` from `_audioSender.dtmf` if it
+  wasn't captured during `call()` / `answer()`.
+
 ## 2.0.0 - 2026-06-13
 
 Ports the addressbook API from sylkrtc.js.
